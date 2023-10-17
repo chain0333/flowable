@@ -62,7 +62,7 @@ public class TaskOperationsServiceImpl implements TaskOperationsService {
     public List<TaskDetails> getTasksByTaskVariable(String varialeName, String variableValue) {
         List<TaskDetails> taskList = new ArrayList();
         try {
-            List<Task> tasks = taskService.createTaskQuery().taskVariableValueEquals(varialeName, variableValue).list();
+            List<Task> tasks = taskService.createTaskQuery().processVariableValueEquals(varialeName, variableValue).orderByTaskCreateTime().asc().list();
             for (Task t : tasks) {
                 taskList.add(utils.taskToTaskDetailsMapper(t, taskService.getVariables(t.getId())));
             }
